@@ -35,6 +35,7 @@ To understand the dataset better, we implemented various visualizations:
 - **Histogram of Glucose Levels** to analyze the distribution across different categories.
 - **Bar Plots for Age & BMI Categories** to compare distributions.
 - **Pie Charts & Count Plots for Smoking Status** to observe imbalances in data.
+- **Heatmap of Feature Correlations** to analyze dependencies between variables and detect strong relationships.
 
 ## 🚀 Next Steps
 - Model Development & Training
