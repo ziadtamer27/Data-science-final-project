@@ -15,7 +15,7 @@ The dataset consists of patient information with various health attributes:
 ## ⚙️ Data Preprocessing Steps
 ### 1️⃣ **Handling Missing Values**
 - Imputed missing BMI and glucose values using **median imputation**.
-- Replaced `Unknown` values in **smoking status** proportionally based on the existing distribution.
+- Replaced `Unknown` values in **smoking status** for kids under 16 to be never smoked.
 
 ### 2️⃣ **Outlier Detection & Treatment**
 - Used **IQR (Interquartile Range)** to remove outliers in BMI (capped at 45) and glucose levels (adjusted for diabetic patients).
