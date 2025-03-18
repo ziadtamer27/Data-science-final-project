@@ -1,4 +1,4 @@
-# 📌 Healthcare Predictive Analytics - Stroke Prediction
+# 📌 Healthcare Predictive Analytics - Stroke Prediction - Milsetone 1
 
 ## 📖 Overview
 This project focuses on predicting the likelihood of a stroke based on various health metrics using **Machine Learning**. The dataset includes crucial health indicators such as age, BMI, glucose levels, and smoking status. By leveraging data preprocessing, feature engineering, and model training, we aim to build a robust predictive model to assist healthcare professionals in early stroke detection.
