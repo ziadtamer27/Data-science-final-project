@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stroke Risk Prediction Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter :wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            background-color: #0a2e4f;
+        }
+
+        .bg-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            overflow: hidden;
+        }
+
+        .bg-primary {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 46, 79, 0.95), rgba(35, 93, 157, 0.85)),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover, 100px 100px;
+        }
+
+        .dna-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.12;
+            background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 30px, rgba(255, 255, 255, 0.5) 30px, rgba(255, 255, 255, 0.5) 40px);
+            animation: dna-move 120s linear infinite;
+            z-index: -4;
+        }
+
+        @keyframes dna-move {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .neural-network,
+        .ekg-line,
+        .medical-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+        }
+
+        .node {
+            width: 4px;
+            height: 4px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .ekg-line {
+            opacity: 0.2;
+            overflow: hidden;
+        }
+
+        .ekg-path {
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent 0%, transparent 40%,
+                    rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 0.8) 42%,
+                    transparent 42%, transparent 43%,
+                    rgba(255, 255, 255, 0.8) 43%, rgba(255, 255, 255, 0.8) 46%,
+                    transparent 46%, transparent 47%,
+                    rgba(255, 255, 255, 0.8) 47%, rgba(255, 255, 255, 0.8) 48%,
+                    transparent 48%, transparent 50%,
+                    rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.8) 52%,
+                    transparent 52%, transparent 100%);
+            animation: ekg-move 8s linear infinite;
+        }
+
+        @keyframes ekg-move {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .page-container {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 100%;
+            height: 100vh;
+            border-radius: 0;
+            box-shadow: none;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        .glass-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            padding: 40px;
+        }
+
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .deco-circle-1 {
+            width: 150px;
+            height: 150px;
+            top: -50px;
+            left: -50px;
+        }
+
+        .deco-circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            right: -50px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            margin-right: 10px;
+            color: #2980b9;
+            animation: pulse-logo 4s infinite alternate;
+        }
+
+        @keyframes pulse-logo {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(41, 128, 185, 0.3);
+            }
+
+            100% {
+                transform: scale(1.1);
+                text-shadow: 0 0 20px rgba(41, 128, 185, 0.6);
+            }
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            color: #2980b9;
+        }
+
+        .subheader {
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            background-color: white;
+        }
+
+        .note {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, #2980b9, transparent);
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
+            transform: translateY(-2px);
+        }
+
+        button:hover::after {
+            left: 100%;
+            opacity: 0.5;
+        }
+
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(41, 128, 185, 0.3);
+        }
+
+        .form-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #7f8c8d;
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-wrapper">
+        <div class="bg-primary"></div>
+        <div class="dna-bg"></div>
+        <div class="neural-network" id="neural-network"></div>
+        <div class="ekg-line">
+            <div class="ekg-path"></div>
+        </div>
+        <div class="medical-icons" id="medical-icons"></div>
+    </div>
+
+   
+    <div class="page-container">
+        <div class="container">
+            <div class="glass-effect"></div>
+            <div class="content">
+                
+                <div class="deco-circle deco-circle-1"></div>
+                <div class="deco-circle deco-circle-2"></div>
+
+               
+                <div class="header">
+                    <div class="logo">
+                        <span class="logo-icon">🧠</span>
+                        <h2><span class="highlight">Stroke Risk</span> Prediction Tool</h2>
+                    </div>
+                    <p class="subheader">Enter patient data to assess stroke risk</p>
+                </div>
+
+             
+                <form action="/predict" method="post">
+                    <div class="form-grid">
+
+                      
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                      
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="number" step="1" id="age" name="age" placeholder="e.g., 45" required />
+                            <span class="note"></span>
+                        </div>
+
+                 
+                        <div class="form-group">
+                            <label for="hypertension">Hypertension:</label>
+                            <select id="hypertension" name="hypertension" required>
+                                <option value="">Select Status</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                    
+                        <div class="form-group">
+                            <label for="heart_disease">Heart Disease:</label>
+                            <select id="heart_disease" name="heart_disease" required>
+                                <option value="">Select Status</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                      
+                        <div class="form-group">
+                            <label for="ever_married">Ever Married:</label>
+                            <select id="ever_married" name="ever_married" required>
+                                <option value="">Select Marital Status</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+
+                      
+                        <div class="form-group">
+                            <label for="work_type">Work Type:</label>
+                            <select id="work_type" name="work_type" required>
+                                <option value="">Select Work Type</option>
+                                <option value="Private">Private</option>
+                                <option value="Self-employed">Self-employed</option>
+                                <option value="Govt_job">Government Job</option>
+                                <option value="Children">Children</option>
+                                <option value="Never_worked">Never Worked</option>
+                            </select>
+                        </div>
+
+                    
+                        <div class="form-group">
+                            <label for="Residence_type">Residence Type:</label>
+                            <select id="Residence_type" name="Residence_type" required>
+                                <option value="">Select Residence Type</option>
+                                <option value="Urban">Urban</option>
+                                <option value="Rural">Rural</option>
+                            </select>
+                        </div>
+
+                       
+                        <div class="form-group">
+                            <label for="avg_glucose_level">Average Glucose Level:</label>
+                            <input type="number" step="1" id="avg_glucose_level" name="avg_glucose_level"
+                                placeholder="e.g., 100" required />
+                            <span class="note"></span>
+                        </div>
+
+                       
+                        <div class="form-group">
+                            <label for="bmi">BMI:</label>
+                            <input type="number" step="1" id="bmi" name="bmi" placeholder="e.g., 25" required />
+                            <span class="note"></span>
+                        </div>
+
+                       
+                        <div class="form-group">
+                            <label for="smoking_status">Smoking Status:</label>
+                            <select id="smoking_status" name="smoking_status" required>
+                                <option value="">Select Smoking Status</option>
+                                <option value="formerly smoked">Formerly Smoked</option>
+                                <option value="never smoked">Never Smoked</option>
+                                <option value="smokes">Currently Smokes</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                        </div>
+
+                       
+
+                    </div>
+
+                    
+                    <button type="submit">Predict Stroke Risk</button>
+                    <div class="form-footer">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Animated Elements -->
+    <script>
+        const neuralNetwork = document.getElementById('neural-network');
+        const medicalIcons = document.getElementById('medical-icons');
+
+        // Neural Network Nodes
+        for (let i = 0; i < 30; i++) {
+            const node = document.createElement('div');
+            node.classList.add('node');
+            node.style.left = `${Math.random() * 100}%`;
+            node.style.top = `${Math.random() * 100}%`;
+            neuralNetwork.appendChild(node);
+        }
+
+        // Medical Icons
+        const icons = ['➕', '❤️', '🩸', '💊', '🧪', '🩺', '🧠', '🫀', '🫁'];
+        for (let i = 0; i < 20; i++) {
+            const icon = document.createElement('div');
+            icon.className = 'medical-icon';
+            icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+            icon.style.left = `${Math.random() * 100}%`;
+            icon.style.top = `${Math.random() * 100}%`;
+            icon.style.animationDelay = `${Math.random() * 10}s`;
+            medicalIcons.appendChild(icon);
+        }
+    </script>
+
+</body>
+
+</html>
