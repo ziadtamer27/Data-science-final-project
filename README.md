@@ -137,6 +137,7 @@ After trying different models:
 
 The XGBoost model was selected based on its superior performance across multiple metrics:
 Classification Report For XGBoost:
+              Classification Report For XGBoost:
               precision    recall  f1-score    support
            0       0.97      0.89      0.93        972
            1       0.86      0.96      0.91        681
@@ -144,7 +145,7 @@ Classification Report For XGBoost:
    macro avg       0.91      0.92      0.92       1653
 weighted avg       0.92      0.92      0.92       1653
 
-AUC-ROC For XGBoost: 0.97
+AUC-ROC For XGBoost: 0.978
 
 *Note: These metrics represent the performance on the test dataset*
 
