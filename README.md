@@ -19,6 +19,7 @@ The Healthcare Predictive Analytics project uses machine learning to forecast st
 │   ├── form.html                  # Input form for patient data
 │   ├── result.html                # Results display page
 │   └── error.html                 # Error handling page
+├── IBM_Project.pdf                # All project details
 ├── healthcare_dataset.csv         # Original dataset
 ├── clean_data_1.csv               # Cleaned dataset (Milestone 1 output)
 ├── clean_data_2.csv               # Enhanced dataset (Milestone 2 output)
