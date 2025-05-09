@@ -177,6 +177,7 @@ Classification Report For XGBoost:
     </td>
   </tr>
 </table>
+
 ## Future Improvements
 
 - Implement continuous model monitoring for performance drift
