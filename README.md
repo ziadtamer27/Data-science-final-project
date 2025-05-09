@@ -152,27 +152,29 @@ Classification Report For XGBoost:
 *Note: These metrics represent the performance on the test dataset*
 ## Screenshots
 
+## Screenshots
+
 <table>
   <tr>
     <td align="center">
-      <img src="Example_1_form.png" alt="Form Example 1" width="400"/>
+      <img src="Examples_Screenshots/Example_1_form.png" alt="Form Example 1" width="400"/>
       <br>
       <em>Stroke Risk Prediction Form - Example 1</em>
     </td>
     <td align="center">
-      <img src="Screenshot 2025-05-09 164909.png" alt="Result Example 1" width="400"/>
+      <img src="Examples_Screenshots/Example_1_pred.png" alt="Result Example 1" width="400"/>
       <br>
       <em>Prediction Result - Example 1</em>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="Screenshot 2025-05-09 165101.png" alt="Form Example 2" width="400"/>
+      <img src="Examples_Screenshots/Example_2_form.png" alt="Form Example 2" width="400"/>
       <br>
       <em>Stroke Risk Prediction Form - Example 2</em>
     </td>
     <td align="center">
-      <img src="Screenshot 2025-05-09 165108.png" alt="Result Example 2" width="400"/>
+      <img src="Examples_Screenshots/Example_2_pred.png" alt="Result Example 2" width="400"/>
       <br>
       <em>Prediction Result - Example 2</em>
     </td>
