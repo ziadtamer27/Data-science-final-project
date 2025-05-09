@@ -149,7 +149,26 @@ Classification Report For XGBoost:
 **AUC-ROC Score:** 0.9785
 
 *Note: These metrics represent the performance on the test dataset*
+## Screenshots
 
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <div style="flex: 1; min-width: 300px;">
+        <img src="Screenshot 2025-05-09 164901.png" alt="Stroke Risk Prediction Form - Example 1" style="max-width: 100%;">
+        <p style="text-align: center;">Stroke Risk Prediction Form - Example 1</p>
+    </div>
+    <div style="flex: 1; min-width: 300px;">
+        <img src="Screenshot 2025-05-09 164909.png" alt="Prediction Result - Example 1" style="max-width: 100%;">
+        <p style="text-align: center;">Prediction Result - Example 1</p>
+    </div>
+    <div style="flex: 1; min-width: 300px;">
+        <img src="Screenshot 2025-05-09 165101.png" alt="Stroke Risk Prediction Form - Example 2" style="max-width: 100%;">
+        <p style="text-align: center;">Stroke Risk Prediction Form - Example 2</p>
+    </div>
+    <div style="flex: 1; min-width: 300px;">
+        <img src="Screenshot 2025-05-09 165108.png" alt="Prediction Result - Example 2" style="max-width: 100%;">
+        <p style="text-align: center;">Prediction Result - Example 2</p>
+    </div>
+</div>
 ## Future Improvements
 
 - Implement continuous model monitoring for performance drift
