@@ -155,7 +155,7 @@ Classification Report For XGBoost:
 <table>
   <tr>
     <td align="center">
-      <img src="Screenshot 2025-05-09 164901.png" alt="Form Example 1" width="400"/>
+      <img src="Example_1_form.png" alt="Form Example 1" width="400"/>
       <br>
       <em>Stroke Risk Prediction Form - Example 1</em>
     </td>
