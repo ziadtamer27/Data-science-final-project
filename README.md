@@ -1,4 +1,4 @@
-# Stroke Risk Prediction - Healthcare Predictive Analytics Project
+# Stroke Risk Prediction - Healthcare Predictive Analytics 
 
 This project is part of the IBM AI & Data Science Track , focused on developing a predictive model to assess stroke risk based on various health parameters. The system provides healthcare professionals with data-driven insights for patient risk prediction and informed decision-making.
 
