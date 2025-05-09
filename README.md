@@ -137,7 +137,7 @@ After trying different models:
 
 The XGBoost model was selected based on its superior performance across multiple metrics:
 Classification Report For XGBoost:
-### 🧾 Classification Report
+###  Classification Report
 
 | Class | Precision | Recall | F1-score | Support |
 |-------|-----------|--------|----------|---------|
@@ -145,8 +145,6 @@ Classification Report For XGBoost:
 | 1     | 0.86      | 0.96   | 0.91     | 681     |
 
 **Accuracy:** 0.92  
-**Macro Avg:** Precision = 0.91, Recall = 0.92, F1-score = 0.92  
-**Weighted Avg:** Precision = 0.92, Recall = 0.92, F1-score = 0.92  
 
 **AUC-ROC Score:** 0.9785
 
