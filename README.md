@@ -146,7 +146,6 @@ Classification Report For XGBoost:
 **AUC-ROC Score:** 0.9785
 
 *Note: These metrics represent the performance on the test dataset*
-## Screenshots
 
 ## Screenshots
 
