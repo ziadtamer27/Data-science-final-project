@@ -88,6 +88,11 @@ uvicorn main:app --reload
 
 5. Open your browser and navigate to http://127.0.0.1:8000
 
+6. Open MLflow:
+```bash
+python -m mlflow ui
+```
+
 ## Usage
 
 1. Access the web interface at http://127.0.0.1:8000
